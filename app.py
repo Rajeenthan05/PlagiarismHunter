@@ -6,6 +6,7 @@ app = Flask(__name__)
 model = pickle.load(open('model.pkl', 'rb'))
 tfidf_vectorizer = pickle.load(open('tfidf_vectorizer.pkl', 'rb'))
 
+
 def detect(input_text):
     vectorized_text = tfidf_vectorizer.transform([input_text])
     result = model.predict(vectorized_text)
@@ -14,6 +15,7 @@ def detect(input_text):
 @app.route('/')
 def home():
     return render_template('index.html')
+
 
 @app.route('/detect', methods=['POST'])
 def detect_plagiarism():
